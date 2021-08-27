@@ -105,7 +105,7 @@ select/poll/epoll 都是 I/O 多路复用的具体实现，select 出现的最�
 int select(int n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
 ```
 
-select 允许应用程序监视一组文件描述符，等待一个或者多个描述符成为就绪状态，从而完成 I/O 操作。
+select 允许应用程序监视一组文件描述符，等待一个或者多个描述符成为就绪状态，从而完成 I/O 操作。用户可以在一个线程内同时处理多个socket的IO请求，这就是它的最大优势。用户可以注册多个socket，然后不断调用select读取被激活的socket，即可达到同一个线程同时处理多个IO请求的目的，存在最大数量1024限制；
 
 - fd_set 使用数组实现，数组大小使用 FD_SETSIZE 定义，所以只能监听少于 FD_SETSIZE 数量的描述符。有三种类型的描述符类型：readset、writeset、exceptset，分别对应读、写、异常条件的描述符集合。
 
@@ -230,7 +230,7 @@ int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；
 int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);
 ```
 
-epoll_ctl() 用于向内核注册新的描述符或者是改变某个文件描述符的状态。已注册的描述符在内核中会被维护在一棵红黑树上，通过回调函数内核会将 I/O 准备好的描述符加入到一个链表中管理，进程调用 epoll_wait() 便可以得到事件完成的描述符。
+epoll_ctl() 用于向内核注册新的描述符或者是改变某个文件描述符的状态。已注册的描述符在内核中会被维护在一棵红黑树上，通过回调函数内核会将 I/O 准备好的描述符加入到一个链表中管理，进程调用 epoll_wait() 便可以得到事件完成的描述符，不需要重复拷贝fd数组，只关注激活的fd。
 
 从上面的描述可以看出，epoll 只需要将描述符从进程缓冲区向内核缓冲区拷贝一次，并且进程不需要通过轮询来获得事件完成的描述符。
 
