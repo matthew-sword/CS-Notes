@@ -46,6 +46,9 @@
 - [MySQL](https://github.com/matthew-sword/CS-Notes/blob/master/notes/MySQL.md)
 - [Redis](https://github.com/matthew-sword/CS-Notes/blob/master/notes/Redis.md)
 
+## C:green_salad: C++
+- [C++ 常见问题](https://github.com/matthew-sword/CS-Notes/blob/master/notes/c++常见问题.md)
+
 ## :coffee: Java
 
 - [Java 基础](https://github.com/matthew-sword/CS-Notes/blob/master/notes/Java%20基础.md)
