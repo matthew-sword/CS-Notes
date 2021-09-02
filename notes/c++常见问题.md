@@ -1,7 +1,15 @@
 # c++常见问题
 
 <!-- GFM-TOC -->
-* [智能指针](#智能指针)  
+* [智能指针](#智能指针)
+    * [unique_ptr](#unique_ptr)
+    * [shared_ptr](#shared_ptr)
+    * [weak_ptr](#weak_ptr)
+* [构造函数和析构函数](#构造函数和析构函数)
+    * [构造函数](#构造函数)
+    * [析构函数](#析构函数)
+* [虚函数](#虚函数)
+* [对象大小计算](#对象大小计算)
 <!-- GFM-TOC -->
 
 ## 智能指针
@@ -129,6 +137,46 @@ int main() {
 
 * 成员函数不占用对象空间，编译后函数与对象是分离的以便节约空间；其中静态遍历在堆区，成员变量在栈区，成员函数在代码区
 
+## new关键字
+C++中使用new运算符产生一个存在于Heap（堆）上对象时，实际上调用了operator new()函数和placement new()函数。在使用new创建堆对象时，new有三种面貌，分别是：new operator、operator new()和placement new()。
+
+### new operator
+new operator是C++保留的关键字，我们无法改变其含义。在使用运算符new时，其最终是通过调用operator new()和placement new()来完成堆对象的创建工作。使用new operator时，其完成的工作有如下三步： 
+1. 分配内存空间
+2. 初始化内存
+3. 返回内存地址
+
+### operator new()
+operator new()用于申请Heap空间，功能类似于C语言的库函数malloc()，尝试从堆上获取一段内存空间，如果成功则直接返回，如果失败则转而去调用一个new handler，然后抛出一个bad_alloc异常。operator new()的函数原型一般为：
+```c++
+void* operator new (std::size_t size) throw (std::bad_alloc);
+
+void *__CRTDECL operator new(size_t size) throw (std::bad_alloc)
+{       
+    // try to allocate size bytes
+    void *p;
+    while ((p = malloc(size)) == 0)      //申请空间
+        if (_callnewh(size) == 0)        //若申请失败则调用处理函数
+        {       
+            // report no memory
+            static const std::bad_alloc nomem;
+            _RAISE(nomem);               //#define _RAISE(x) ::std:: _Throw(x) 抛出nomem的异常
+        }
+    return (p);
+}
+```
+
+1. 函数后添加throw表示可能会抛出throw后括号内的异常； 
+2. operator new()分为全局和类成员。
+    1. 当为类成员函数时，使用new产生类对象时调用的则是其成员函数operator new()。
+    2. 如果要重载全局的operator new会改变所有默认的operator new的方式，所以必须要注意。
+    3. 正如new与delete相互对应，operator new与operator delete也是一一对应，如果重载了operator new，那么理应重载operator delete。
+
+### placement new()
+一般来说，使用new申请空间时，是从系统的堆中分配空间，申请所得空间的位置根据当时内存实际使用情况决定。但是，在某些特殊情况下，可能需要在程序员指定的特定内存创建对象，这就是所谓的“定位放置new”（placement new）操作。
+placement new()是一个特殊的operator new()，因为其**是operator new()函数的重载版本**，只是取了个别名叫作placement new罢了。作用是在已经获得的堆空间上调用类构造函数来初始化对象，也就是定位构造对象。
+
 ## 参考链接
 
 * [现代c++教程](https://changkun.de/modern-cpp/zh-cn/05-pointers/index.html#5-4-std-weak-ptr)
+* [huihut的c++面经](https://github.com/huihut/interview)
