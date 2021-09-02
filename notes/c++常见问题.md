@@ -9,7 +9,10 @@
     * [构造函数](#构造函数)
     * [析构函数](#析构函数)
 * [虚函数](#虚函数)
-* [对象大小计算](#对象大小计算)
+* [new关键](#new关键)
+    * [new operator](#new-operator)
+    * [operator new()](#operator-new())
+    * [placement new()](#placement-new())
 <!-- GFM-TOC -->
 
 ## 智能指针
