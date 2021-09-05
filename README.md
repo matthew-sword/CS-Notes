@@ -48,9 +48,9 @@ C:green_salad: C++
 
 ## C:green_salad: C++
 - [C++ 汇总](https://github.com/matthew-sword/CS-Notes/blob/master/notes/C++汇总.md)
-- [C++ 汇总](https://github.com/matthew-sword/CS-Notes/blob/master/notes/C++常见问题.md)
-- [C++ 汇总](https://github.com/matthew-sword/CS-Notes/blob/master/notes/C++STL.md)
-- [C++ 汇总](https://github.com/matthew-sword/CS-Notes/blob/master/notes/C++STL汇总.md)
+- [C++ 常见问题](https://github.com/matthew-sword/CS-Notes/blob/master/notes/C++常见问题.md)
+- [C++ STL](https://github.com/matthew-sword/CS-Notes/blob/master/notes/C++STL.md)
+- [C++ STL汇总](https://github.com/matthew-sword/CS-Notes/blob/master/notes/C++STL汇总.md)
 
 
 ## :coffee: Java
