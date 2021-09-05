@@ -47,7 +47,11 @@ C:green_salad: C++
 - [Redis](https://github.com/matthew-sword/CS-Notes/blob/master/notes/Redis.md)
 
 ## C:green_salad: C++
-- [C++ 汇总](https://github.com/matthew-sword/CS-Notes/blob/master/notes/c++汇总.md)
+- [C++ 汇总](https://github.com/matthew-sword/CS-Notes/blob/master/notes/C++汇总.md)
+- [C++ 汇总](https://github.com/matthew-sword/CS-Notes/blob/master/notes/C++常见问题.md)
+- [C++ 汇总](https://github.com/matthew-sword/CS-Notes/blob/master/notes/C++STL.md)
+- [C++ 汇总](https://github.com/matthew-sword/CS-Notes/blob/master/notes/C++STL汇总.md)
+
 
 ## :coffee: Java
 
