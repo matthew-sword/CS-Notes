@@ -55,6 +55,14 @@ Redis 是速度非常快的非关系型（NoSQL）内存键值数据库，可以
 
 Redis 支持很多特性，例如将内存中的数据持久化到硬盘中，使用复制来扩展读性能，使用分片来扩展写性能。
 
+redis高性能的原因
+
+* 内存数据库
+* 多路io复用
+* 单线程处理请求，避免多线程切换与资源冲突（io都在内存，耗时很短）
+* 高效数据结构
+  * string惰性释放等
+
 ## 二、数据类型
 
 | 数据类型 | 可以存储的值 | 操作 |
@@ -82,6 +90,22 @@ OK
 (nil)
 ```
 
+#### string类型的底层原理
+
+* 使用自由结构保存了字符串长度，相较于C语言不会发生越界，
+
+* 并且二进制安全（C语言以'\0'结尾）
+
+* 惰性释放
+
+```c
+struct sdshdr {
+    int len;
+    int free;
+    char buf[];
+}
+```
+  
 ### LIST
 
 <div align="center"> <img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/fb327611-7e2b-4f2f-9f5b-38592d408f07.png" width="400"/> </div><br>
