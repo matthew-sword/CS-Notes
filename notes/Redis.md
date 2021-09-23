@@ -661,3 +661,4 @@ Redis 没有关系型数据库中的表这一概念来将同种类型的数据�
 - [Redis 3.0 中文版- 分片](http://wiki.jikexueyuan.com/project/redis-guide)
 - [Redis 应用场景](http://www.scienjus.com/redis-use-case/)
 - [Using Redis as an LRU cache](https://redis.io/topics/lru-cache)
+- [我的阿里面经，和面试官漫谈Redis，面试当谈笑风生](https://www.jianshu.com/p/e9281deab498)
